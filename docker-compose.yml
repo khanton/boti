@@ -1,0 +1,12 @@
+version: '3'
+services: 
+  boti:
+    restart: always
+    image: ghcr.io/khanton/boti:master
+    volumes: 
+      - ./db:/app/db
+    environment: 
+      DB_PATH: db
+      PORT: 8080
+      TOKEN: "1799278572:AAErkHAYqVlJdl2E8hONtJKgmcX2cLMGKKM"
+      SERVER: "https://api.khanton.ru"
