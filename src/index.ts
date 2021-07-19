@@ -67,8 +67,9 @@ const start = async () => {
 
     await server.bot.telegram.setWebhook(`${SERVER}${SECRET_PATH}`)
     await server.listen(<string>process.env.PORT || 8088, <string>process.env.HOST || '127.0.0.1')
+    
   } catch (err) {
-    server.log.error(err)
+    console.error(err)
     process.exit(1)
   }
 }
