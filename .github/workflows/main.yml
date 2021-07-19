@@ -57,8 +57,8 @@ jobs:
           # Deployment command args.
           args: --test
           # The docker login password
-          docker_login_password: ${{ secrets.GITHUB_TOKEN }}
+          #docker_login_password: ${{ secrets.GITHUB_TOKEN }}
           # The docker login user
-          docker_login_user: ${{ github.actor }}
+          #docker_login_user: ${{ github.actor }}
           # The docker login registry
-          docker_login_registry: ${{ env.REGISTRY }}
+          #docker_login_registry: ${{ env.REGISTRY }}
