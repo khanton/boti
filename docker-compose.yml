@@ -1,12 +1,42 @@
 version: '3'
 services: 
+  reproxy:
+    restart: always
+    image: umputun/reproxy:master
+    container_name: reproxy
+    hostname: reproxy
+    ports:
+      - "80:8080"
+      - "443:8443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./certs:/srv/var/acme
+    environment:
+      - TZ=UTC
+      - DOCKER_ENABLED=true
+      - DOCKER_AUTO=true
+      - DEBUG=false
+      - MGMT=false
+      - SSL_TYPE=auto
+      - SSL_ACME_FQDN=api.khanton.ru
+
   boti:
     restart: always
     image: ghcr.io/khanton/boti:master
+    hostname: api
+    container_name: api
+    expose:
+     - "8080"
     volumes: 
       - ./db:/app/db
     environment: 
-      DB_PATH: db
-      PORT: 8080
-      TOKEN: "1799278572:AAErkHAYqVlJdl2E8hONtJKgmcX2cLMGKKM"
-      SERVER: "https://api.khanton.ru"
+      - DB_PATH=db
+      - PORT=8080
+      - HOST=0.0.0.0
+      - TOKEN=1799278572:AAErkHAYqVlJdl2E8hONtJKgmcX2cLMGKKM
+      - SERVER=https://api.khanton.ru
+    labels:
+      reproxy.port: 8080
+      reproxy.server: '*'
+      reproxy.route: '^/(.*)'
+      reproxy.dest: '/@1'
