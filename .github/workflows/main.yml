@@ -53,6 +53,6 @@ jobs:
           key: ${{secrets.BOTI_SSH_PRIVATE}}
           script: |
             echo "${{ secrets.GITHUB_TOKEN }}" |docker login ${{ env.REGISTRY }} --username ${{ github.actor }} --password-stdin
-            docker-compose pull --no-ansi
-            docker-compose restart --no-ansi
+            docker-compose --no-ansi pull
+            docker-compose --no-ansi restart
             docker logout
