@@ -51,5 +51,8 @@ jobs:
           host: khanton.ru
           user: boti
           key: ${{secrets.BOTI_SSH_PRIVATE}}
-          script: | 
-            ls -la
+          script: |
+            echo "${{ secrets.GITHUB_TOKEN }}" |docker login ${{ env.REGISTRY }} --username ${{ github.actor }} --password-stdin
+            docker-compose pull
+            docker-compose restart
+            docker logout
