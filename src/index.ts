@@ -23,16 +23,18 @@ if (!DB_PATH) {
   throw Error('No DB_PATH!')
 }
 
+const API_V1_PREFIX: string = '/api/v1'
+
 const start = async () => {
 
   const server: FastifyInstance = Fastify({ logger: pino() })
 
   server.log.info({ msg: `Start with bot token: ${TOKEN}` })
 
-  server.register(fpr);
+  server.register(fpr)
 
   try {
-    const db = await getDatabase(DB_PATH)
+    const db = await getDatabase(DB_PATH || 'db')
     server.decorate('db', db);
     server.decorate('bot', bot(TOKEN, db))
   } catch (e) {
@@ -40,7 +42,7 @@ const start = async () => {
     process.exit(200);
   }
 
-  const SECRET_PATH: string = `/telegraf/${server.bot.secretPathComponent()}`
+  const SECRET_PATH: string = `${API_V1_PREFIX}/telegraf/${server.bot.secretPathComponent()}`
 
   server.post(SECRET_PATH, (req: FastifyRequest, res: FastifyReply) => {
     server.bot.handleUpdate(req.body as Update, res.raw);
@@ -50,7 +52,7 @@ const start = async () => {
     Body: { msg: string }
   }>
 
-  server.post('/msg', async (req: MsgRequest, reply) => {
+  server.post('${API_V1_PREFIX}/msg', async (req: MsgRequest, reply) => {
 
     interface Row {
       chat_id: string
