@@ -54,5 +54,5 @@ jobs:
           script: |
             echo "${{ secrets.GITHUB_TOKEN }}" |docker login ${{ env.REGISTRY }} --username ${{ github.actor }} --password-stdin
             docker-compose --no-ansi pull
-            docker-compose --no-ansi restart
+            docker-compose --no-ansi up --remove-orphans -d
             docker logout
