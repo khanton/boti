@@ -50,6 +50,6 @@ jobs:
         with:
           host: khanton.ru
           user: boti
-          key: ${{secret.BOTI_PRIVATE_KEY}}
+          key: ${{secrets.BOTI_PRIVATE_KEY}}
           script: | 
             ls -la
