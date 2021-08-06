@@ -33,7 +33,6 @@ services:
       - DB_PATH=db
       - PORT=8080
       - HOST=0.0.0.0
-      - TOKEN=1799278572:AAErkHAYqVlJdl2E8hONtJKgmcX2cLMGKKM
       - SERVER=https://api.khanton.ru
     labels:
       reproxy.port: 8080
