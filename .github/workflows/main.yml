@@ -56,3 +56,4 @@ jobs:
             docker-compose --no-ansi pull
             docker-compose --no-ansi up --remove-orphans -d
             docker logout
+            
