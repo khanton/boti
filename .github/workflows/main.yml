@@ -56,11 +56,15 @@ jobs:
             docker-compose --no-ansi pull
             docker-compose --no-ansi up --remove-orphans -d
             docker logout
+      - name: Sleep for 30s
+        uses: juliangruber/sleep-action@v1
+        with:
+          time: 30s
       - name: Notify about success deploy
         uses: indiesdev/curl@v1
         with:
           url: https://api.khanton.ru/api/v1/msg/a950dd02d2b38490
           method: POST
           headers: '{ "Content-Type" : "application/json" }'
-          body: '{"msg": "Установлена новая версия BOTI !", "type":"markdown"}'
-          debug: true
+          body: '{"msg": "Установлена новая версия BOTI !", "type":"text"}'
+          is_debug: true
