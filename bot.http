@@ -1,0 +1,37 @@
+###
+#
+POST http://localhost:9099/api/v1/bots HTTP/1.1
+Content-Type: application/json
+
+{
+    "botName": "vezuka.ru", 
+    "botUserName": "vezuka_ru_bot", 
+    "token": "1799278572:AAErkHAYqVlJdl2E8hONtJKgmcX2cLMGKKM"
+}
+
+###
+
+POST http://localhost:9099/api/v1/bots HTTP/1.1
+Content-Type: application/json
+
+{
+    "botName": "Vezuka Buisness", 
+    "botUserName": "vezuka_buisness_bot ", 
+    "token": "1929894844:AAECw90tr1raKOigeWYhC-tWBQt66Wo-GqY"
+}
+
+###
+POST http://localhost:9099/api/v1/msg/da02fde58373b002 HTTP/1.1
+Content-Type: application/json
+
+{
+    "msg": "Проверка звука!"
+}
+
+###
+POST http://localhost:9099/api/v1/msg/8e252cfcc969fb99 HTTP/1.1
+Content-Type: application/json
+
+{
+    "msg": "Проверка *связи* \\!"
+}

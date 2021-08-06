@@ -1,16 +1,6 @@
-import { open } from 'sqlite';
-import sqlite3 from 'sqlite3'
+import { Connection, createConnection } from "typeorm"
 
-export default async function getDatabase(path: string) {
+export default async function getDatabase(): Promise<Connection> {
 
-  const db = await open<sqlite3.Database, sqlite3.Statement>({
-    filename: `${path}/database.db`,
-    driver: sqlite3.Database
-  })
-
-  await db.migrate({
-    migrationsPath: 'migrate'
-  })
-
-  return db
+  return await createConnection()
 }
